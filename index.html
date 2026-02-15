@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload ZOO</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .gallery { display: flex; flex-wrap: wrap; gap: 20px; }
+        .card { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 200px; text-align: center; }
+        img { max-width: 100%; border-radius: 4px; cursor: pointer; }
+        button { margin-top: 10px; padding: 5px 10px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <h2>Click the button to copy the image link!</h2>
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+       const kepek = [
+            "AppRedstoneLogo.png",
+            "FireeRedstone.png",
+            "Redstone_Launcher_2.png",
+            "redstone_beta.png",
+            "redstone_curseforge.png",
+            "redstone_index.png",
+            "redstone_instances.png",
+            "redstone_lancher_logo.png",
+            "redstone_launcher_banner.png",
+            "redstone_modrinth.png",
+            "redstone_players.png",
+            "redstone_servers.png",
+            "redstone_themes.png",
+            "redstone_wardrobe.png",
+            "redstoneleak.png",
+            "regiredstone.png"
+        ];
+
+        const gallery = document.getElementById('gallery');
+
+        kepek.forEach(url => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            card.innerHTML = `
+                <img src="${url}" alt="kép">
+                <button onclick="masol('${url}')">Cím másolása</button>
+            `;
+            gallery.appendChild(card);
+        });
+
+        function masol(szoveg) {
+            navigator.clipboard.writeText(szoveg).then(() => {
+                alert("Másolva a vágólapra: " + szoveg);
+            }).catch(err => {
+                console.error("Hiba a másoláskor: ", err);
+            });
+        }
+    </script>
+
+</body>
+</html>
