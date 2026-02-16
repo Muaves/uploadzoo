@@ -2,62 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload ZOO</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
-        .gallery { display: flex; flex-wrap: wrap; gap: 20px; }
-        .card { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 200px; text-align: center; }
-        img { max-width: 100%; border-radius: 4px; cursor: pointer; }
-        button { margin-top: 10px; padding: 5px 10px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; }
-        button:hover { background: #0056b3; }
+        body { font-family: sans-serif; background: #e9ecef; color: white; padding: 20px; margin: 0; }
+        h2 { text-align: center; color: #000000; font-size: 40px;}
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
+        .card { background: #ced4da; padding: 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); text-align: center; }
+        .img-container { width: 100%; height: 150px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #111; border-radius: 4px; }
+        img { max-width: 100%; max-height: 100%; cursor: zoom-in; transition: transform 0.2s; }
+        img:hover { transform: scale(1.05); }
+        .file-name { margin: 10px 0; font-size: 0.8rem; color: #212529; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        button { width: 100%; padding: 8px; cursor: pointer; background: #ADB5BD; color: white; border: none; border-radius: 4px; font-weight: bold; }
+        button:hover { background: #212529; }
+        #lightbox { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: #343A40; align-items: center; justify-content: center; cursor: zoom-out; opacity: 0.92;}
+        #lightbox img { max-width: 90%; max-height: 90%; box-shadow: 0 0 20px #343A40; }
     </style>
 </head>
 <body>
 
-    <h2>Click the button to copy the image link!</h2>
+    <h2>Upload ZOO Gallery</h2>
     <div class="gallery" id="gallery"></div>
 
+    <div id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="">
+    </div>
+
     <script>
-       const kepek = [
-            "AppRedstonelogo.png",
-            "FireeRedstone.png",
-            "Redstone_Launcher_2.png",
-            "redstone_beta.png",
-            "redstone_curseforge.png",
-            "redstone_index.png",
-            "redstone_instances.png",
-            "redstone_lancher_logo.png",
-            "redstone_launcher_banner.png",
-            "redstone_modrinth.png",
-            "redstone_players.png",
-            "redstone_servers.png",
-            "redstone_themes.png",
-            "redstone_wardrobe.png",
-            "redstoneleak.png",
-            "regiredstone.png"
+        const kepek = [
+            "AppRedstonelogo.png", "FireeRedstone.png", "Redstone_Launcher_2.png",
+            "redstone_beta.png", "redstone_curseforge.png", "redstone_index.png",
+            "redstone_instances.png", "redstone_lancher_logo.png", "redstone_launcher_banner.png",
+            "redstone_modrinth.png", "redstone_players.png", "redstone_servers.png",
+            "redstone_themes.png", "redstone_wardrobe.png", "redstoneleak.png", "regiredstone.png"
         ];
 
         const gallery = document.getElementById('gallery');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
 
         kepek.forEach(url => {
             const card = document.createElement('div');
             card.className = 'card';
-
             card.innerHTML = `
-                <img src="${url}" alt="kép">
-                <button onclick="masol('${url}')">Cím másolása</button>
+                <div class="img-container">
+                    <img src="${url}" alt="${url}" onclick="openImg('${url}')">
+                </div>
+                <div class="file-name">${url}</div>
+                <button onclick="copyLink('${url}')">Copy Link</button>
             `;
             gallery.appendChild(card);
         });
 
-        function masol(szoveg) {
-            navigator.clipboard.writeText(szoveg).then(() => {
-                alert("Másolva a vágólapra: " + szoveg);
-            }).catch(err => {
-                console.error("Hiba a másoláskor: ", err);
+        function openImg(url) {
+            lightboxImg.src = url;
+            lightbox.style.display = 'flex';
+        }
+
+        function copyLink(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied: " + text);
             });
         }
     </script>
-
 </body>
 </html>
