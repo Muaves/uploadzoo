@@ -585,18 +585,18 @@
     <div class="gallery" id="gallery"></div>
 
     <div id="lightbox" onclick="this.style.display='none'">
-        <img id="lightbox-img" src="">
+        <img id="lightbox-img" src="" loading="lazy">
     </div>
 
     <script>
         const kepek = [
-            "bocs_teso.png", "AppRedstonelogo.png", "FireeRedstone.png", "Redstone_Launcher_2.png",
+            "AppRedstonelogo.png", "FireeRedstone.png", "Redstone_Launcher_2.png",
             "redstone_beta.png", "redstone_curseforge.png", "redstone_index.png",
             "redstone_instances.png", "redstone_lancher_logo.png", "redstone_launcher_banner.png",
             "redstone_modrinth.png", "redstone_players.png", "redstone_servers.png",
             "redstone_themes.png", "redstone_wardrobe.png", "redstoneleak.png", "regiredstone.png",
             "avg_lightmode_user.png", "fav_cat.png", "feather.gif", "hallgaspetofi.jpg",
-            "lszsz_rounded_dark.png", "muavesbust.png", "twitch_logo.png", "tiktok_logo.png", "spotify_logo_better.png", "umecat.gif", "nPrLc0.mp4","video_2.mp4", "hey-brother-hey.mp4"
+            "lszsz_rounded_dark.png", "muavesbust.png", "umecat.gif", "nPrLc0.mp4", "hey-brother-hey.mp4"
         ];
 
         const gallery = document.getElementById('gallery');
@@ -611,7 +611,7 @@
 
             card.innerHTML = `
         <div class="img-container">
-            <img src="${fullUrl}" alt="${url}" onclick="openImg('${fullUrl}')">
+            <img src="${fullUrl}" alt="${url}" onclick="openImg('${fullUrl}')" loading="lazy">
         </div>
         <div class="file-name">${url}</div>
         <button onclick="copyLink('${fullUrl}')">Copy Link</button>
