@@ -1,0 +1,30 @@
+name: Update Gallery List
+on:
+  push:
+    paths-ignore:
+      - 'index.html' 
+
+jobs:
+  update-list:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate File List
+        run: |
+          # Get all files except hidden ones, the script itself, and html files
+          FILES=$(ls -p | grep -v / | grep -vE '\.(html|yml|md|txt)$' | jq -R . | jq -s . | tr -d '\n')
+          
+          sed -i "/\/\/ START_FILE_LIST/,/\/\/ END_FILE_LIST/ { /\/\/ START_FILE_LIST/! { /\/\/ END_FILE_LIST/! d; } }" index.html
+          sed -i "/\/\/ START_FILE_LIST/a const kepek = $FILES;" index.html
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "Gallery Bot"
+          git config --global user.email "actions@github.com"
+          git add index.html
+          git commit -m "Auto-update gallery file list" || exit 0
+          git push
