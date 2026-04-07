@@ -589,6 +589,7 @@
     </div>
 
     <script>
+        // START_FILES
         const kepek = [
             "AppRedstonelogo.png", "FireeRedstone.png", "Redstone_Launcher_2.png",
             "redstone_beta.png", "redstone_curseforge.png", "redstone_index.png",
@@ -598,7 +599,7 @@
             "avg_lightmode_user.png", "fav_cat.png", "feather.gif", "hallgaspetofi.jpg",
             "lszsz_rounded_dark.png", "muavesbust.png", "umecat.gif", "nPrLc0.mp4", "hey-brother-hey.mp4"
         ];
-
+        // END_FILES
         const gallery = document.getElementById('gallery');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
@@ -606,19 +607,26 @@
         kepek.forEach(url => {
             const card = document.createElement('div');
             card.className = 'card';
-
             const fullUrl = "https://uploadzoo.muaves.com/" + url;
+            const ext = url.split('.').pop().toLowerCase();
+    
+            let mediaHtml = '';
+    
+            if (['mp4', 'webm', 'ogg'].includes(ext)) {
+                mediaHtml = `<video src="${fullUrl}" controls style="max-width:100%; max-height:100%;"></video>`;
+            } else if (['mp3', 'wav', 'ogg'].includes(ext)) {
+                mediaHtml = `<div style="padding:20px;">🎵<audio src="${fullUrl}" controls style="width:100%"></audio></div>`;
+            } else {
+                mediaHtml = `<img src="${fullUrl}" alt="${url}" onclick="openImg('${fullUrl}')" loading="lazy">`;
+            }
 
-            card.innerHTML = `
-        <div class="img-container">
-            <img src="${fullUrl}" alt="${url}" onclick="openImg('${fullUrl}')" loading="lazy">
-        </div>
+    card.innerHTML = `
+        <div class="img-container">${mediaHtml}</div>
         <div class="file-name">${url}</div>
         <button onclick="copyLink('${fullUrl}')">Copy Link</button>
     `;
-
-            gallery.appendChild(card);
-        });
+    gallery.appendChild(card);
+});
 
         function openImg(url) {
             lightboxImg.src = url;
