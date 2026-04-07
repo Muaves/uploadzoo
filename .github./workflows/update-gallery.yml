@@ -15,11 +15,13 @@ jobs:
 
       - name: Generate File List
         run: |
-          # Get all files except hidden ones, the script itself, and html files
-          FILES=$(ls -p | grep -v / | grep -vE '\.(html|yml|md|txt)$' | jq -R . | jq -s . | tr -d '\n')
+          # 1. Get the files (ignoring subfolders and non-media files)
+          FILES=$(ls -p | grep -v / | grep -vE '\.(html|yml|md|txt|ico)$' | jq -R . | jq -s . | tr -d '\n')
           
-          sed -i "/\/\/ START_FILE_LIST/,/\/\/ END_FILE_LIST/ { /\/\/ START_FILE_LIST/! { /\/\/ END_FILE_LIST/! d; } }" index.html
-          sed -i "/\/\/ START_FILE_LIST/a const kepek = $FILES;" index.html
+          # 2. Match the exact markers you put in your index.html
+          # This deletes everything between START_FILES and END_FILES and adds the new list
+          sed -i "/\/\/ START_FILES/,/\/\/ END_FILES/ { /\/\/ START_FILES/! { /\/\/ END_FILES/! d; } }" index.html
+          sed -i "/\/\/ START_FILES/a const kepek = $FILES;" index.html
 
       - name: Commit and Push
         run: |
