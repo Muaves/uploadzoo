@@ -15,6 +15,13 @@
         href="https://raw.githubusercontent.com/Muaves/muaves.github.io/refs/heads/main/img/GBRR%20-%20PAGE.ico"
         type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://muaves.com/cookies/cookie.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3K03LYDK01"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
     <style>
         body {
             font-family: sans-serif;
@@ -580,7 +587,8 @@
 </head>
 
 <body>
-
+<div id="cookie-placeholder"></div>
+<script src="https://muaves.com/cookies/cookie.js"></script>
     <h2>Upload ZOO Gallery</h2>
     <div class="gallery" id="gallery"></div>
 
@@ -589,7 +597,7 @@
     </div>
 
     <script>
-        // START_FILES
+        
         const kepek = [
             "AppRedstonelogo.png", "FireeRedstone.png", "Redstone_Launcher_2.png",
             "redstone_beta.png", "redstone_curseforge.png", "redstone_index.png",
@@ -599,7 +607,6 @@
             "avg_lightmode_user.png", "fav_cat.png", "feather.gif", "hallgaspetofi.jpg",
             "lszsz_rounded_dark.png", "muavesbust.png", "umecat.gif", "nPrLc0.mp4", "hey-brother-hey.mp4"
         ];
-        // END_FILES
         const gallery = document.getElementById('gallery');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
