@@ -1,704 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muaves - Upload ZOO</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Muaves's upload page" />
-    <meta property="og:description"
-        content="Hey, in this page i usually upload things like pics nad vids just for fun!" />
-    <meta name="theme-color" content="#c644af">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="shortcut icon"
-        href="https://raw.githubusercontent.com/Muaves/muaves.github.io/refs/heads/main/img/GBRR%20-%20PAGE.ico"
-        type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://muaves.com/cookies/cookie.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3K03LYDK01"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muaves - Upload ZOO</title>
+<meta property="og:title" content="Muaves's upload page" />
+<meta property="og:description" content="Hey, in this page i usually upload things like pics nad vids just for fun!" />
+<meta name="theme-color" content="#c644af">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="shortcut icon" href="https://raw.githubusercontent.com/Muaves/muaves.github.io/refs/heads/main/img/GBRR%20-%20PAGE.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://muaves.com/cookies/cookie.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3K03LYDK01"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 </script>
-    <style>
-        body {
-            font-family: sans-serif;
-            background: #e9ecef;
-            color: white;
-            padding: 20px;
-            margin: 0;
-        }
-
-        h2 {
-            text-align: center;
-            color: #000000;
-            font-size: 40px;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .card {
-            background: #ced4da;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
-        .img-container {
-            width: 100%;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: #111;
-            border-radius: 4px;
-        }
-
-        img {
-            max-width: 100%;
-            max-height: 100%;
-            cursor: zoom-in;
-            transition: transform 0.2s;
-        }
-
-        img:hover {
-            transform: scale(1.05);
-        }
-
-        .file-name {
-            margin: 10px 0;
-            font-size: 0.8rem;
-            color: #212529;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        button {
-            width: 100%;
-            padding: 8px;
-            cursor: pointer;
-            background: #ADB5BD;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background: #212529;
-        }
-
-        #lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #343A40;
-            align-items: center;
-            justify-content: center;
-            cursor: zoom-out;
-            opacity: 1;
-        }
-
-        #lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            box-shadow: 0 0 20px #343A40;
-        }
-    </style>
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'VT323', monospace;
-            font-size: 18px;
-            background: #e0e0e0;
-            color: #1a1a1a;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
-
-        .banner {
-            background: linear-gradient(180deg, #1a4480, #0d2240);
-            color: #fff;
-            text-align: center;
-            padding: 8px;
-            font-size: 20px;
-            border-bottom: 3px solid #c41e3a;
-        }
-
-        header {
-            background: #fff;
-            text-align: center;
-            padding: 30px 16px;
-            border-bottom: 3px solid #999;
-        }
-
-        header h1 {
-            font-size: 48px;
-            color: #1a4480;
-            letter-spacing: 4px;
-            margin-bottom: 8px;
-        }
-
-        header p {
-            color: #666;
-            font-size: 20px;
-        }
-
-        nav {
-            background: #c0c0c0;
-            border-top: 2px solid #fff;
-            border-bottom: 2px solid #555;
-            padding: 8px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 4px;
-        }
-
-        .nav-btn {
-            background: linear-gradient(180deg, #e8e8e8, #c0c0c0);
-            border-top: 2px solid #fff;
-            border-left: 2px solid #fff;
-            border-bottom: 2px solid #555;
-            border-right: 2px solid #555;
-            padding: 6px 16px;
-            font-family: 'VT323', monospace;
-            font-size: 18px;
-            color: #1a1a1a;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .nav-btn:hover {
-            background: linear-gradient(180deg, #f0f0f0, #d0d0d0);
-        }
-
-        .nav-btn:active,
-        .nav-btn.active {
-            border-top: 2px solid #555;
-            border-left: 2px solid #555;
-            border-bottom: 2px solid #fff;
-            border-right: 2px solid #fff;
-            background: #b0b0b0;
-        }
-
-        main {
-            padding: 24px 0;
-        }
-
-        section {
-            margin-bottom: 32px;
-        }
-
-        .card {
-            background: #fff;
-            border-top: 2px solid #fff;
-            border-left: 2px solid #fff;
-            border-bottom: 2px solid #666;
-            border-right: 2px solid #666;
-            box-shadow: 3px 3px 0 #888;
-            padding: 20px;
-        }
-
-        .card h2 {
-            color: #c41e3a;
-            font-size: 28px;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 8px;
-            margin-bottom: 16px;
-        }
-
-        .card h3 {
-            color: #1a4480;
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .divider {
-            height: 3px;
-            background: linear-gradient(90deg, #e74c3c, #f39c12, #2ecc71, #3498db, #9b59b6, #e74c3c);
-            margin: 32px 0;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        @media (max-width: 600px) {
-
-            .grid-2,
-            .grid-3 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .service-box {
-            background: #f0f0f0;
-            border: 2px solid #999;
-            padding: 16px;
-        }
-
-        .service-box h4 {
-            color: #1a4480;
-            margin-bottom: 8px;
-        }
-
-        .service-box p {
-            color: #555;
-            font-size: 16px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-
-        @media (max-width: 600px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .gallery-item {
-            background: #d0d0d0;
-            border: 2px solid #888;
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .link-list {
-            list-style: none;
-        }
-
-        .link-list li {
-            margin-bottom: 8px;
-        }
-
-        .link-list a {
-            color: #1a4480;
-            text-decoration: underline;
-            font-size: 20px;
-        }
-
-        .link-list a:hover {
-            color: #c41e3a;
-        }
-
-        .link-list a:visited {
-            color: #6a3093;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 8px;
-            font-family: 'VT323', monospace;
-            font-size: 18px;
-            border: 2px inset #999;
-            background: #fff;
-            margin-bottom: 12px;
-        }
-
-        input:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #1a4480;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .webring {
-            text-align: center;
-            margin: 32px 0;
-        }
-
-        .webring-box {
-            display: inline-block;
-            background: #fff;
-            border: 2px solid #888;
-            padding: 16px 24px;
-        }
-
-        .webring-box p {
-            color: #666;
-            margin-bottom: 8px;
-        }
-
-        .webring-box h4 {
-            color: #c41e3a;
-            margin-bottom: 12px;
-        }
-
-        .webring-btns {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-        }
-
-        footer {
-            background: #fff;
-            border-top: 3px solid #999;
-            padding: 24px 16px;
-            text-align: center;
-        }
-
-        .badges {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            background: #f0f0f0;
-            border: 2px solid #888;
-            padding: 4px 12px;
-            font-size: 14px;
-        }
-
-        footer p {
-            color: #666;
-            margin-bottom: 8px;
-        }
-
-        #visitor-count {
-            font-weight: bold;
-            color: #1a4480;
-        }
-
-        .contact-info p {
-            margin-bottom: 6px;
-        }
-    </style>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            margin: 0;
-            display: grid;
-            grid-template-rows: 1fr auto;
-            min-height: 100vh;
-            background-color: #f1f1f1;
-        }
-
-        .main-content {
-            padding: 2rem;
-        }
-
-
-        .footer-classic {
-            background-color: var(--footer-bg);
-            color: var(--footer-text-color);
-            padding: 3rem 1.5rem;
-        }
-
-        .footer-classic__container {
-            max-width: 1140px;
-            margin: 0 auto;
-        }
-
-        .footer-classic a {
-            color: var(--footer-link-color);
-            text-decoration: none;
-            transition: color 0.2s ease-in-out;
-        }
-
-        .footer-classic a:hover {
-            color: var(--footer-link-hover-color);
-            text-decoration: underline;
-        }
-
-        .footer-classic__brand .logo:hover {
-            text-decoration: none;
-        }
-
-        .footer-classic__main {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--footer-border-color);
-        }
-
-        .footer-classic__brand .logo {
-            display: block;
-            width: 150px;
-            margin-bottom: 1rem;
-        }
-
-        .footer-classic__brand .logo path {
-            fill: var(--footer-heading-color);
-            transition: fill 0.2s ease-in-out;
-        }
-
-        .footer-classic__brand .logo:hover path {
-            fill: var(--footer-link-hover-color);
-        }
-
-        .footer-classic__brand p {
-            font-size: 0.875rem;
-            line-height: 1.5;
-            margin: 0;
-        }
-
-        .footer-classic__heading {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--footer-heading-color);
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-
-        .footer-classic__links ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .footer-classic__links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-classic__bottom {
-            padding-top: 2rem;
-            font-size: 0.875rem;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            text-align: center;
-        }
-
-        .footer-classic__copyright {
-            margin: 0;
-        }
-
-        .footer-classic__social ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .footer-classic__social a:hover {
-            text-decoration: none;
-        }
-
-        .footer-classic__social svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-
-        @media (min-width: 768px) {
-            .footer-classic__main {
-                grid-template-columns: 2fr 1fr 1fr;
-                gap: 3rem;
-            }
-
-            .footer-classic__bottom {
-                flex-direction: row;
-                justify-content: space-between;
-                text-align: left;
-            }
-        }
-
-        .big_footer_wrapper {
-            width: 100%;
-            overflow: hidden;
-            background-color: #f1f1f1;
-            display: flex;
-            align-items: flex-end;
-            height: auto;
-            margin-top: -2vw;
-        }
-
-        .big_footer {
-            font-size: 24vw;
-            color: #000000;
-            text-align: center;
-            line-height: 1.25;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            white-space: nowrap;
-            user-select: none;
-            transform: translateY(15%);
-        }
-    </style>
+<style>
+body {
+    font-family: sans-serif;
+    background: #e9ecef;
+    color: white;
+    padding: 20px;
+    margin: 0;
+}
+h2 {
+    text-align: center;
+    color: #000000;
+    font-size: 40px;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+.card {
+    background: #ced4da;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+.img-container {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #111;
+    border-radius: 4px;
+}
+img {
+    max-width: 100%;
+    max-height: 100%;
+    cursor: zoom-in;
+    transition: transform 0.2s;
+}
+img:hover {
+    transform: scale(1.05);
+}
+.file-name {
+    margin: 10px 0;
+    font-size: 0.8rem;
+    color: #212529;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+button {
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+    background: #ADB5BD;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+button:hover {
+    background: #212529;
+}
+#lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #343A40;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    opacity: 1;
+}
+#lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0 0 20px #343A40;
+}
+.folder-card {
+    background: #ced4da;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    grid-column: 1 / -1;
+}
+.folder-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 8px;
+    background: #ADB5BD;
+    border-radius: 4px;
+    margin-bottom: 0;
+}
+.folder-header:hover {
+    background: #212529;
+    color: white;
+}
+.folder-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #212529;
+}
+.folder-header:hover .folder-title {
+    color: white;
+}
+.folder-toggle {
+    font-size: 1.2rem;
+    color: #212529;
+    transition: transform 0.2s;
+}
+.folder-header:hover .folder-toggle {
+    color: white;
+}
+.folder-toggle.open {
+    transform: rotate(90deg);
+}
+.folder-contents {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px 0 0 0;
+}
+.folder-contents.open {
+    display: grid;
+}
+#loading {
+    text-align: center;
+    color: #495057;
+    font-size: 1.2rem;
+    padding: 40px;
+}
+</style>
+<style>
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'VT323', monospace; font-size: 18px; background: #e0e0e0; color: #1a1a1a; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
+.banner { background: linear-gradient(180deg, #1a4480, #0d2240); color: #fff; text-align: center; padding: 8px; font-size: 20px; border-bottom: 3px solid #c41e3a; }
+header { background: #fff; text-align: center; padding: 30px 16px; border-bottom: 3px solid #999; }
+header h1 { font-size: 48px; color: #1a4480; letter-spacing: 4px; margin-bottom: 8px; }
+header p { color: #666; font-size: 20px; }
+nav { background: #c0c0c0; border-top: 2px solid #fff; border-bottom: 2px solid #555; padding: 8px; position: sticky; top: 0; z-index: 100; }
+nav ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
+.nav-btn { background: linear-gradient(180deg, #e8e8e8, #c0c0c0); border-top: 2px solid #fff; border-left: 2px solid #fff; border-bottom: 2px solid #555; border-right: 2px solid #555; padding: 6px 16px; font-family: 'VT323', monospace; font-size: 18px; color: #1a1a1a; cursor: pointer; text-decoration: none; }
+.nav-btn:hover { background: linear-gradient(180deg, #f0f0f0, #d0d0d0); }
+.nav-btn:active, .nav-btn.active { border-top: 2px solid #555; border-left: 2px solid #555; border-bottom: 2px solid #fff; border-right: 2px solid #fff; background: #b0b0b0; }
+main { padding: 24px 0; }
+section { margin-bottom: 32px; }
+.card { background: #fff; border-top: 2px solid #fff; border-left: 2px solid #fff; border-bottom: 2px solid #666; border-right: 2px solid #666; box-shadow: 3px 3px 0 #888; padding: 20px; }
+.card h2 { color: #c41e3a; font-size: 28px; border-bottom: 2px solid #ccc; padding-bottom: 8px; margin-bottom: 16px; }
+.card h3 { color: #1a4480; font-size: 22px; margin-bottom: 8px; }
+.card p { line-height: 1.5; margin-bottom: 12px; }
+.divider { height: 3px; background: linear-gradient(90deg, #e74c3c, #f39c12, #2ecc71, #3498db, #9b59b6, #e74c3c); margin: 32px 0; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+.service-box { background: #f0f0f0; border: 2px solid #999; padding: 16px; }
+.service-box h4 { color: #1a4480; margin-bottom: 8px; }
+.service-box p { color: #555; font-size: 16px; }
+.gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+.gallery-item { background: #d0d0d0; border: 2px solid #888; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; color: #666; font-size: 14px; }
+.link-list { list-style: none; }
+.link-list li { margin-bottom: 8px; }
+.link-list a { color: #1a4480; text-decoration: underline; font-size: 20px; }
+.link-list a:hover { color: #c41e3a; }
+.link-list a:visited { color: #6a3093; }
+input, textarea { width: 100%; padding: 8px; font-family: 'VT323', monospace; font-size: 18px; border: 2px inset #999; background: #fff; margin-bottom: 12px; }
+input:focus, textarea:focus { outline: none; border-color: #1a4480; }
+textarea { resize: vertical; min-height: 100px; }
+.webring { text-align: center; margin: 32px 0; }
+.webring-box { display: inline-block; background: #fff; border: 2px solid #888; padding: 16px 24px; }
+.webring-box p { color: #666; margin-bottom: 8px; }
+.webring-box h4 { color: #c41e3a; margin-bottom: 12px; }
+.webring-btns { display: flex; gap: 8px; justify-content: center; }
+footer { background: #fff; border-top: 3px solid #999; padding: 24px 16px; text-align: center; }
+.badges { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.badge { background: #f0f0f0; border: 2px solid #888; padding: 4px 12px; font-size: 14px; }
+footer p { color: #666; margin-bottom: 8px; }
+#visitor-count { font-weight: bold; color: #1a4480; }
+.contact-info p { margin-bottom: 6px; }
+</style>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; margin: 0; display: grid; grid-template-rows: 1fr auto; min-height: 100vh; background-color: #f1f1f1; }
+.main-content { padding: 2rem; }
+.footer-classic { background-color: var(--footer-bg); color: var(--footer-text-color); padding: 3rem 1.5rem; }
+.footer-classic__container { max-width: 1140px; margin: 0 auto; }
+.footer-classic a { color: var(--footer-link-color); text-decoration: none; transition: color 0.2s ease-in-out; }
+.footer-classic a:hover { color: var(--footer-link-hover-color); text-decoration: underline; }
+.footer-classic__brand .logo:hover { text-decoration: none; }
+.footer-classic__main { display: grid; grid-template-columns: 1fr; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--footer-border-color); }
+.footer-classic__brand .logo { display: block; width: 150px; margin-bottom: 1rem; }
+.footer-classic__brand .logo path { fill: var(--footer-heading-color); transition: fill 0.2s ease-in-out; }
+.footer-classic__brand .logo:hover path { fill: var(--footer-link-hover-color); }
+.footer-classic__brand p { font-size: 0.875rem; line-height: 1.5; margin: 0; }
+.footer-classic__heading { font-size: 1rem; font-weight: 600; color: var(--footer-heading-color); margin-top: 0; margin-bottom: 1rem; }
+.footer-classic__links ul { margin: 0; padding: 0; list-style: none; }
+.footer-classic__links li { margin-bottom: 0.75rem; }
+.footer-classic__bottom { padding-top: 2rem; font-size: 0.875rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; text-align: center; }
+.footer-classic__copyright { margin: 0; }
+.footer-classic__social ul { margin: 0; padding: 0; list-style: none; display: flex; gap: 1.5rem; }
+.footer-classic__social a:hover { text-decoration: none; }
+.footer-classic__social svg { width: 20px; height: 20px; fill: currentColor; }
+@media (min-width: 768px) { .footer-classic__main { grid-template-columns: 2fr 1fr 1fr; gap: 3rem; } .footer-classic__bottom { flex-direction: row; justify-content: space-between; text-align: left; } }
+.big_footer_wrapper { width: 100%; overflow: hidden; background-color: #f1f1f1; display: flex; align-items: flex-end; height: auto; margin-top: -2vw; }
+.big_footer { font-size: 24vw; color: #000000; text-align: center; line-height: 1.25; margin: 0; padding: 0; width: 100%; white-space: nowrap; user-select: none; transform: translateY(15%); }
+</style>
 </head>
-
 <body>
+
 <div id="cookie-placeholder"></div>
 <script src="https://muaves.com/cookies/cookie.js"></script>
-    <h2>Upload ZOO Gallery</h2>
-    <div class="gallery" id="gallery"></div>
 
-    <div id="lightbox" onclick="this.style.display='none'">
-        <img id="lightbox-img" src="" loading="lazy">
-    </div>
+<h2>Upload ZOO Gallery</h2>
+<div id="loading">Loading files...</div>
+<div class="gallery" id="gallery"></div>
 
-    <script>
-        
-        const kepek = [
-            "AppRedstonelogo.png", "FireeRedstone.png", "Redstone_Launcher_2.png",
-            "redstone_beta.png", "redstone_curseforge.png", "redstone_index.png",
-            "redstone_instances.png", "redstone_lancher_logo.png", "redstone_launcher_banner.png",
-            "redstone_modrinth.png", "redstone_players.png", "redstone_servers.png",
-            "redstone_themes.png", "redstone_wardrobe.png", "redstoneleak.png", "regiredstone.png",
-            "avg_lightmode_user.png", "fav_cat.png", "feather.gif", "hallgaspetofi.jpg",
-            "lszsz_rounded_dark.png", "muavesbust.png", "umecat.gif", "nPrLc0.mp4", "hey-brother-hey.mp4", "fisevents_retro.gif", "redstone-retro.gif", "muaves-badge.gif", 
-            "muaves-retro1.gif", "muaves-retro2.gif", "muaves-retro3.gif", "muaves-retro4.gif", "muaves-retrobanner1.gif", "muaves-retrobtn1.gif", 
-            "muaves-retrobtn2.gif"
-        ];
-        const gallery = document.getElementById('gallery');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
+<div id="lightbox" onclick="this.style.display='none'">
+    <img id="lightbox-img" src="" loading="lazy">
+</div>
 
-        kepek.forEach(url => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            const fullUrl = "https://uploadzoo.muaves.com/" + url;
-            const ext = url.split('.').pop().toLowerCase();
-    
-            let mediaHtml = '';
-    
-            if (['mp4', 'webm', 'ogg'].includes(ext)) {
-                mediaHtml = `<video src="${fullUrl}" controls style="max-width:100%; max-height:100%;"></video>`;
-            } else if (['mp3', 'wav', 'ogg'].includes(ext)) {
-                mediaHtml = `<div style="padding:20px;">🎵<audio src="${fullUrl}" controls style="width:100%"></audio></div>`;
-            } else {
-                mediaHtml = `<img src="${fullUrl}" alt="${url}" onclick="openImg('${fullUrl}')" loading="lazy">`;
-            }
+<script>
+const REPO = 'Muaves/uploadzoo';
+const BRANCH = 'main';
+const BASE_URL = 'https://uploadzoo.muaves.com/';
+const SKIP = new Set(['index.html', 'CNAME', 'README.md']);
+const IMAGES = new Set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'bmp', 'ico']);
+const VIDEOS = new Set(['mp4', 'webm', 'ogg', 'mov']);
+const AUDIO  = new Set(['mp3', 'wav', 'ogg', 'flac', 'm4a']);
 
+const gallery = document.getElementById('gallery');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+function ext(name) {
+    return name.split('.').pop().toLowerCase();
+}
+
+function isMedia(name) {
+    const e = ext(name);
+    return IMAGES.has(e) || VIDEOS.has(e) || AUDIO.has(e);
+}
+
+function makeMediaEl(url, name) {
+    const e = ext(name);
+    if (VIDEOS.has(e)) return `<video src="${url}" controls style="max-width:100%;max-height:100%;"></video>`;
+    if (AUDIO.has(e))  return `<div style="padding:20px;">🎵<audio src="${url}" controls style="width:100%"></audio></div>`;
+    return `<img src="${url}" alt="${name}" onclick="openImg('${url}')" loading="lazy">`;
+}
+
+function makeCard(name, url, container) {
+    const card = document.createElement('div');
+    card.className = 'card';
     card.innerHTML = `
-        <div class="img-container">${mediaHtml}</div>
-        <div class="file-name">${url}</div>
-        <button onclick="copyLink('${fullUrl}')">Copy Link</button>
+        <div class="img-container">${makeMediaEl(url, name)}</div>
+        <div class="file-name">${name}</div>
+        <button onclick="copyLink('${url}')">Copy Link</button>
     `;
-    gallery.appendChild(card);
-});
+    container.appendChild(card);
+}
 
-        function openImg(url) {
-            lightboxImg.src = url;
-            lightbox.style.display = 'flex';
+async function fetchDir(path) {
+    const apiUrl = `https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`;
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    return res.json();
+}
+
+async function renderFolder(folderItem, parentContainer) {
+    const folderCard = document.createElement('div');
+    folderCard.className = 'folder-card';
+
+    const header = document.createElement('div');
+    header.className = 'folder-header';
+    header.innerHTML = `<span class="folder-title">📁 ${folderItem.name}</span><span class="folder-toggle">▶</span>`;
+
+    const contents = document.createElement('div');
+    contents.className = 'folder-contents';
+
+    let loaded = false;
+
+    header.addEventListener('click', async () => {
+        const toggle = header.querySelector('.folder-toggle');
+        const isOpen = contents.classList.toggle('open');
+        toggle.classList.toggle('open', isOpen);
+
+        if (isOpen && !loaded) {
+            loaded = true;
+            contents.textContent = 'Loading...';
+            try {
+                const items = await fetchDir(folderItem.path);
+                contents.textContent = '';
+                let hasMedia = false;
+                for (const item of items) {
+                    if (item.type === 'file' && isMedia(item.name) && !SKIP.has(item.name)) {
+                        const url = BASE_URL + item.path;
+                        makeCard(item.name, url, contents);
+                        hasMedia = true;
+                    }
+                }
+                if (!hasMedia) {
+                    contents.textContent = 'No media files in this folder.';
+                }
+            } catch (e) {
+                contents.textContent = 'Failed to load folder.';
+            }
         }
+    });
 
-        function copyLink(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Copied: " + text);
-            });
+    folderCard.appendChild(header);
+    folderCard.appendChild(contents);
+    parentContainer.appendChild(folderCard);
+}
+
+async function init() {
+    try {
+        const items = await fetchDir('');
+        document.getElementById('loading').remove();
+
+        for (const item of items) {
+            if (item.type === 'file' && isMedia(item.name) && !SKIP.has(item.name)) {
+                const url = BASE_URL + item.name;
+                makeCard(item.name, url, gallery);
+            } else if (item.type === 'dir') {
+                await renderFolder(item, gallery);
+            }
         }
+    } catch (e) {
+        document.getElementById('loading').textContent = 'Failed to load gallery. ' + e.message;
+    }
+}
 
-    </script>
-    <footer class="footer-classic" role="contentinfo">
-        <div class="footer-classic__container">
-            <div class="footer-classic__main">
+function openImg(url) {
+    lightboxImg.src = url;
+    lightbox.style.display = 'flex';
+}
 
-                <div class="footer-classic__brand">
-                    <a href="https://muaves.com" class="logo">
-                        <h1 style="text-align: center;">Muaves</h1>
-                        </svg>
-                    </a>
-                    <p>
-                        Hey! i'm Muaves, and i write code. mostly web stuff - html, css, javascript, that whole thing.
-                        been doing this for a while now and honestly? still love it.
-                    </p>
-                </div>
+function copyLink(text) {
+    navigator.clipboard.writeText(text).then(() => alert('Copied: ' + text));
+}
 
-                <div class="footer-classic__links">
-                    <h3 class="footer-classic__heading">About</h3>
-                    <ul>
-                        <li><a href="https://github.com/muaves">Github</a></li>
-                        <li><a href="https://muaves.com">Main Page</a></li>
-                        <li><a href="https://muaves.com/portfolio-api">Projects</a></li>
-                        <li><a href="https://redstone-launcher.com">Redstone Launcher</a></li>
-                        <li><a href="https://discord.com/users/1198173046196944962">Contact me</a></li>
-                    </ul>
-                </div>
+init();
+</script>
 
-                <div class="footer-classic__links">
-                    <h3 class="footer-classic__heading">Resources</h3>
-                    <ul>
-                        <li><a href="pp/blog.html">Blog</a></li>
-                        <li><a href="pp/help_center.html">Help Center / FAQ</a></li>
-                        <li><a href="pp/press_kit.html">Templates</a></li>
-                        <li><a href="pp/case_studies.html">More projects</a></li>
-                    </ul>
-                </div>
-
-            </div>
-            <div class="footer-classic__bottom">
-
-                <p class="footer-classic__copyright">
-                    © 2026 Muaves <a href="pp/privacy_policy.html">Privacy Policy</a> | <a
-                        href="pp/terms_of_service.html">Terms of Service</a>
+<footer class="footer-classic" role="contentinfo">
+    <div class="footer-classic__container">
+        <div class="footer-classic__main">
+            <div class="footer-classic__brand">
+                <a href="https://muaves.com" class="logo">
+                    <h1 style="text-align: center;">Muaves</h1>
+                </a>
+                <p>
+                    Hey! i'm Muaves, and i write code. mostly web stuff - html, css, javascript, that whole thing.
+                    been doing this for a while now and honestly? still love it.
                 </p>
-
+            </div>
+            <div class="footer-classic__links">
+                <h3 class="footer-classic__heading">About</h3>
+                <ul>
+                    <li><a href="https://github.com/muaves">Github</a></li>
+                    <li><a href="https://muaves.com">Main Page</a></li>
+                    <li><a href="https://muaves.com/portfolio-api">Projects</a></li>
+                    <li><a href="https://redstone-launcher.com">Redstone Launcher</a></li>
+                    <li><a href="https://discord.com/users/1198173046196944962">Contact me</a></li>
+                </ul>
+            </div>
+            <div class="footer-classic__links">
+                <h3 class="footer-classic__heading">Resources</h3>
+                <ul>
+                    <li><a href="pp/blog.html">Blog</a></li>
+                    <li><a href="pp/help_center.html">Help Center / FAQ</a></li>
+                    <li><a href="pp/press_kit.html">Templates</a></li>
+                    <li><a href="pp/case_studies.html">More projects</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
-    <div class="big_footer_wrapper">
-        <h1 class="big_footer">Muaves</h1>
+        <div class="footer-classic__bottom">
+            <p class="footer-classic__copyright">
+                © 2026 Muaves <a href="pp/privacy_policy.html">Privacy Policy</a> | <a href="pp/terms_of_service.html">Terms of Service</a>
+            </p>
+        </div>
     </div>
-</body>
+</footer>
 
+<div class="big_footer_wrapper">
+    <h1 class="big_footer">Muaves</h1>
+</div>
+
+</body>
 </html>
